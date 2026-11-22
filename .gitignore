@@ -361,3 +361,9 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+# Carpetas de compilación de .NET
+**/bin/
+**/obj/
+
+# Configuración personal del usuario
+*.user
