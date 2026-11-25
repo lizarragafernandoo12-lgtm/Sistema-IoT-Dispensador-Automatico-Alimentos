@@ -183,10 +183,9 @@ void setup() {
 }
 
 void loop() {
-  unsigned long tiempoActual = millis();
-
   // --- Siempre escuchamos Bluetooth primero, pase lo que pase ---
   escucharBluetooth();
+    unsigned long tiempoActual = millis();
 
   if (balanza.is_ready()) {
     float lectura = balanza.get_units(1);
