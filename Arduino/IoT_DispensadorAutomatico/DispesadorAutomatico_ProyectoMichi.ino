@@ -119,7 +119,7 @@ void procesarTramaRecibida(String trama) {
 // armando el "sobre" entre '<' y '>' sin detener el resto del programa.
 void escucharBluetooth() {
   while (Serial1.available() > 0) {
-    char c = Serial.read();
+    char c = Serial1.read();
 
     if (c == '<') {
       bufferEntrante = "";
