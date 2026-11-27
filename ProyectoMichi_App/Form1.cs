@@ -1,11 +1,29 @@
-        using System.IO.Ports;
-        namespace ProyectoMichi_App
-        {
+using System.Windows.Forms.DataVisualization.Charting;
+using System.IO.Ports;
+
+namespace ProyectoMichi_App
+{
     public partial class Form1 : Form
     {
         public Form1()
         {
             InitializeComponent();
+            chartPlato = new Chart();
+            chartPlato.Location = new Point(20, 25);
+            chartPlato.Size = new Size(200, 200);
+
+            ChartArea area = new ChartArea();
+            chartPlato.ChartAreas.Add(area);
+
+            Series serie = new Series();
+            serie.ChartType = SeriesChartType.Doughnut;
+            serie["DoughnutRadius"] = "30";
+            serie.Points.AddY(450);   // valor de prueba (lleno)
+            serie.Points.AddY(550);   // valor de prueba (vacío, hasta llegar a 1000)
+            chartPlato.Series.Add(serie);
+
+            materialCard2.Controls.Add(chartPlato);
+
             puerto.DataReceived += Puerto_DataReceived;
         }
 
@@ -183,29 +201,71 @@
         SerialPort puerto = new SerialPort("COM7", 9600);
         Receptor tramita = new Receptor();
         Checksum checkador = new Checksum();
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        Chart chartPlato;
+
+        private async void swBlue_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cambiandoEstado)
+            {
+                return;
+
+            }
+            swBlue.Enabled = false;
+            this.UseWaitCursor = true;
+            try
+            {
+                if (swBlue.Checked)
+                {
+                    await Task.Run(() => puerto.Open());
+                    lblBlue.ForeColor = Color.FromArgb(0, 120, 215);
+                }
+                else if (puerto.IsOpen)
+                {
+                    puerto.Close();
+                    lblBlue.ForeColor = Color.FromArgb(64, 64, 64);
+                }
+            }
+            catch (Exception ex)
+            {
+                cambiandoEstado = true;
+                swBlue.Checked = false;
+                cambiandoEstado = false;
+
+                MessageBox.Show("Revisa tu conexión", "Error de conexión", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                this.UseWaitCursor = false;
+                swBlue.Enabled = true;
+            }
+
+        }
+        private bool cambiandoEstado = false;
+        private void lblBlue_Click(object sender, EventArgs e)
+        {
+            swBlue.Checked = !swBlue.Checked;
+        }
+
+        private void picIcono_Click(object sender, EventArgs e)
+        {
+            swBlue.Checked = !swBlue.Checked;
+        }
+
+        private void bntDispe_Click(object sender, EventArgs e)
         {
             try
             {
-                if (checkBox.Checked)
-                {
-                    puerto.Open();
-                }
-                else
-                {
-                    puerto.Close();
-                }
+                puerto.WriteLine(checkador.armarChecksum(checkador.comChecksum, checkador.numChecksum));
             }
             catch (Exception)
             {
-                MessageBox.Show("Revisa tus conexiones");
+                MessageBox.Show("Error al enviar comando", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
         }
 
-        private void btnDispe_Click(object sender, EventArgs e)
+        private void hopeRoundButton1_Click(object sender, EventArgs e)
         {
-           
-            puerto.WriteLine(checkador.armarChecksum(checkador.comChecksum, checkador.numChecksum));
 
         }
     }

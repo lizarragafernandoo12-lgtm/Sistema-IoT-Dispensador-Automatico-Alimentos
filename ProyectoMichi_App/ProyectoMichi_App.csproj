@@ -9,6 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="HIC.System.Windows.Forms.DataVisualization" Version="1.0.1" />
+    <PackageReference Include="ReaLTaiizor" Version="3.8.2.1" />
     <PackageReference Include="System.IO.Ports" Version="11.0.0" />
   </ItemGroup>
 
