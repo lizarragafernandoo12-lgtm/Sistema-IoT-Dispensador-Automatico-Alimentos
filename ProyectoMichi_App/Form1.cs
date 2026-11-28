@@ -5,12 +5,13 @@ namespace ProyectoMichi_App
 {
     public partial class Form1 : Form
     {
+
         public Form1()
         {
             InitializeComponent();
             chartPlato = new Chart();
-            chartPlato.Location = new Point(20, 25);
-            chartPlato.Size = new Size(200, 200);
+            chartPlato.Location = new Point(50, 30);
+            chartPlato.Size = new Size(175, 175);
 
             ChartArea area = new ChartArea();
             chartPlato.ChartAreas.Add(area);
@@ -18,15 +19,10 @@ namespace ProyectoMichi_App
             Series serie = new Series();
             serie.ChartType = SeriesChartType.Doughnut;
             serie["DoughnutRadius"] = "30";
-            serie.Points.AddY(450);   // valor de prueba (lleno)
-            serie.Points.AddY(550);   // valor de prueba (vacío, hasta llegar a 1000)
             chartPlato.Series.Add(serie);
-
             materialCard2.Controls.Add(chartPlato);
-
             puerto.DataReceived += Puerto_DataReceived;
         }
-
         public class Checksum
         {
             public string comChecksum = "SERVIR";
@@ -60,7 +56,8 @@ namespace ProyectoMichi_App
             public string down;
             public string numManual;
             public string chk0;
-
+            public int gramitos;
+            public string depEstado;
             public bool evaluarPos(int a)
             {
                 if (a != -1)
@@ -129,6 +126,13 @@ namespace ProyectoMichi_App
                         {
                             numPlato = num.Substring(0, pos2);
                             numDep = num.Substring(pos2 + 1);
+                            int posP = numPlato.IndexOf(':');
+                            int posG = numPlato.IndexOf('g');
+                            gramitos = int.Parse(numPlato.Substring(posP + 1, posG - (posP + 1)));
+                            int posD = numDep.IndexOf(':');
+                            depEstado = numDep.Substring(posD + 1);
+
+
                         }
                         else { return; }
                         break;
@@ -159,6 +163,7 @@ namespace ProyectoMichi_App
                         }
                         else { return; }
                         break;
+
                 }
                 if (chk0 == hexa)
                 {
@@ -172,6 +177,7 @@ namespace ProyectoMichi_App
             {
                 try
                 {
+                    picAdv.Visible = false;
                     string massenenger = puerto.ReadLine();
                     tramita.mensaje = massenenger;
                     tramita.decifrarTrama();
@@ -180,14 +186,42 @@ namespace ProyectoMichi_App
                         switch (tramita.com)
                         {
                             case "ESTADO":
-                                lblPlato.Text = tramita.numPlato;
-                                lblDeposito.Text = tramita.numDep;
+
+                                chartPlato.Series[0].Points.Clear();
+                                chartPlato.Series[0].Points.AddY(tramita.gramitos);
+                                chartPlato.Series[0].Points.AddY(1000 - tramita.gramitos);
+                                chartPlato.Series[0].Points[0].Color = Color.DeepSkyBlue;
+                                chartPlato.Series[0].Points[1].Color = Color.LightGray;
+                                lblPlato.Text = tramita.gramitos.ToString();
+                                lblDeposito.Text = tramita.depEstado;
+                                lblAlimento.Text = "Nivel de alimento: " + tramita.depEstado;
+                                if (tramita.depEstado == "BAJO")
+                                {
+
+                                    lblDeposito.ForeColor = Color.FromArgb(255, 255, 20);
+                                    picAdv.Visible = true;
+
+                                }
+                                else
+                                {
+                                    lblDeposito.ForeColor = Color.FromArgb(64, 64, 64);
+                                    picAdv.Visible = false;
+                                }
                                 break;
                             case "EVENTO":
-                                lblAct.Text = tramita.numEvento + ": " + tramita.numManual;
+                                if (tramita.numManual == "MANUAL")
+                                {
+                                   
+                                    lblAct.Text = "Servido " + tramita.numManual;
+                                }
+                                else
+                                {
+
+                                    lblAct.Text = "Servido Automatico";
+                                }
                                 break;
                             case "SERVO":
-                                lblAct.Text = tramita.numServo;
+                                lblAct.Text = "Compuerta: " + tramita.numServo;
                                 break;
                         }
                     }
@@ -202,7 +236,6 @@ namespace ProyectoMichi_App
         Receptor tramita = new Receptor();
         Checksum checkador = new Checksum();
         Chart chartPlato;
-
         private async void swBlue_CheckedChanged(object sender, EventArgs e)
         {
             if (cambiandoEstado)
@@ -223,6 +256,7 @@ namespace ProyectoMichi_App
                 {
                     puerto.Close();
                     lblBlue.ForeColor = Color.FromArgb(64, 64, 64);
+                    picAdv.Visible = false;
                 }
             }
             catch (Exception ex)
@@ -264,9 +298,6 @@ namespace ProyectoMichi_App
 
         }
 
-        private void hopeRoundButton1_Click(object sender, EventArgs e)
-        {
-
-        }
+    
     }
 }

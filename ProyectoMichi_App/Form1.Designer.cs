@@ -38,31 +38,43 @@
             bntDispe = new ReaLTaiizor.Controls.ParrotButton();
             hopeRoundButton1 = new ReaLTaiizor.Controls.HopeRoundButton();
             materialCard2 = new ReaLTaiizor.Controls.MaterialCard();
+            gramos = new Label();
+            pictureBox1 = new PictureBox();
+            label2 = new Label();
+            label1 = new Label();
             lblPlato = new Label();
             materialCard3 = new ReaLTaiizor.Controls.MaterialCard();
+            pictureBox2 = new PictureBox();
+            lblAlimento = new Label();
+            picAdv = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)picIcono).BeginInit();
             materialCard1.SuspendLayout();
             materialCard2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             materialCard3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)picAdv).BeginInit();
             SuspendLayout();
             // 
             // lblDeposito
             // 
             lblDeposito.AutoSize = true;
-            lblDeposito.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblDeposito.Location = new Point(70, 111);
+            lblDeposito.Font = new Font("Segoe UI Semibold", 26F, FontStyle.Bold);
+            lblDeposito.Location = new Point(90, 66);
             lblDeposito.Name = "lblDeposito";
-            lblDeposito.Size = new Size(104, 25);
+            lblDeposito.Size = new Size(164, 47);
             lblDeposito.TabIndex = 5;
-            lblDeposito.Text = "DEP: BAJO";
+            lblDeposito.Text = "Deposito";
             // 
             // lblAct
             // 
             lblAct.AutoSize = true;
-            lblAct.Location = new Point(85, 161);
+            lblAct.Font = new Font("Segoe UI Emoji", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblAct.Location = new Point(358, 423);
             lblAct.Name = "lblAct";
-            lblAct.Size = new Size(0, 15);
+            lblAct.Size = new Size(65, 17);
             lblAct.TabIndex = 6;
+            lblAct.Text = "Actividad ";
             // 
             // swBlue
             // 
@@ -132,7 +144,7 @@
             bntDispe.ClickTextColor = Color.Silver;
             bntDispe.CornerRadius = 25;
             bntDispe.Cursor = Cursors.Hand;
-            bntDispe.Font = new Font("Segoe UI Emoji", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            bntDispe.Font = new Font("Segoe UI Emoji", 30F, FontStyle.Bold);
             bntDispe.Horizontal_Alignment = StringAlignment.Center;
             bntDispe.HoverBackgroundColor = Color.DodgerBlue;
             bntDispe.HoverTextColor = Color.FromArgb(224, 224, 224);
@@ -164,35 +176,82 @@
             hopeRoundButton1.TabIndex = 14;
             hopeRoundButton1.TextColor = Color.White;
             hopeRoundButton1.WarningColor = Color.FromArgb(230, 162, 60);
-            hopeRoundButton1.Click += hopeRoundButton1_Click;
             // 
             // materialCard2
             // 
             materialCard2.BackColor = Color.FromArgb(255, 255, 255);
+            materialCard2.Controls.Add(gramos);
+            materialCard2.Controls.Add(pictureBox1);
+            materialCard2.Controls.Add(label2);
+            materialCard2.Controls.Add(label1);
             materialCard2.Controls.Add(lblPlato);
             materialCard2.Depth = 0;
             materialCard2.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard2.Location = new Point(147, 69);
+            materialCard2.Location = new Point(112, 69);
             materialCard2.Margin = new Padding(14);
             materialCard2.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             materialCard2.Name = "materialCard2";
             materialCard2.Padding = new Padding(14);
-            materialCard2.Size = new Size(238, 238);
+            materialCard2.Size = new Size(273, 238);
             materialCard2.TabIndex = 15;
+            // 
+            // gramos
+            // 
+            gramos.AutoSize = true;
+            gramos.Font = new Font("Segoe UI", 11F);
+            gramos.Location = new Point(110, 127);
+            gramos.Name = "gramos";
+            gramos.Size = new Size(59, 20);
+            gramos.TabIndex = 8;
+            gramos.Text = "gramos";
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.InitialImage = (Image)resources.GetObject("pictureBox1.InitialImage");
+            pictureBox1.Location = new Point(3, 93);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(52, 58);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 7;
+            pictureBox1.TabStop = false;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 12F);
+            label2.Location = new Point(56, 215);
+            label2.Name = "label2";
+            label2.Size = new Size(155, 21);
+            label2.TabIndex = 6;
+            label2.Text = "Peso Máximo 1000 g";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI Emoji", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.Location = new Point(62, 14);
+            label1.Name = "label1";
+            label1.Size = new Size(147, 21);
+            label1.TabIndex = 5;
+            label1.Text = "Plato de Comida (g)";
             // 
             // lblPlato
             // 
             lblPlato.AutoSize = true;
-            lblPlato.Font = new Font("Segoe UI Emoji", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblPlato.Location = new Point(73, 111);
+            lblPlato.Font = new Font("Segoe UI Emoji", 18F, FontStyle.Bold);
+            lblPlato.Location = new Point(112, 92);
             lblPlato.Name = "lblPlato";
-            lblPlato.Size = new Size(93, 21);
+            lblPlato.Size = new Size(36, 32);
             lblPlato.TabIndex = 4;
-            lblPlato.Text = "PLATO: 0G";
+            lblPlato.Text = " 0";
             // 
             // materialCard3
             // 
             materialCard3.BackColor = Color.FromArgb(255, 255, 255);
+            materialCard3.Controls.Add(pictureBox2);
+            materialCard3.Controls.Add(lblAlimento);
+            materialCard3.Controls.Add(picAdv);
             materialCard3.Controls.Add(lblDeposito);
             materialCard3.Depth = 0;
             materialCard3.ForeColor = Color.FromArgb(222, 0, 0, 0);
@@ -201,8 +260,38 @@
             materialCard3.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             materialCard3.Name = "materialCard3";
             materialCard3.Padding = new Padding(14);
-            materialCard3.Size = new Size(238, 238);
+            materialCard3.Size = new Size(275, 238);
             materialCard3.TabIndex = 16;
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
+            pictureBox2.Location = new Point(14, 47);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(81, 135);
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.TabIndex = 8;
+            pictureBox2.TabStop = false;
+            // 
+            // lblAlimento
+            // 
+            lblAlimento.AutoSize = true;
+            lblAlimento.Font = new Font("Segoe UI", 11F);
+            lblAlimento.Location = new Point(95, 122);
+            lblAlimento.Name = "lblAlimento";
+            lblAlimento.Size = new Size(0, 20);
+            lblAlimento.TabIndex = 7;
+            // 
+            // picAdv
+            // 
+            picAdv.Image = (Image)resources.GetObject("picAdv.Image");
+            picAdv.Location = new Point(198, 81);
+            picAdv.Name = "picAdv";
+            picAdv.Size = new Size(29, 26);
+            picAdv.SizeMode = PictureBoxSizeMode.Zoom;
+            picAdv.TabIndex = 6;
+            picAdv.TabStop = false;
+            picAdv.Visible = false;
             // 
             // Form1
             // 
@@ -222,8 +311,11 @@
             materialCard1.PerformLayout();
             materialCard2.ResumeLayout(false);
             materialCard2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             materialCard3.ResumeLayout(false);
             materialCard3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)picAdv).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -240,5 +332,12 @@
         private ReaLTaiizor.Controls.MaterialCard materialCard2;
         private ReaLTaiizor.Controls.MaterialCard materialCard3;
         private Label lblPlato;
+        private Label label2;
+        private Label label1;
+        private PictureBox pictureBox1;
+        private Label gramos;
+        private PictureBox picAdv;
+        private Label lblAlimento;
+        private PictureBox pictureBox2;
     }
 }
